@@ -1,0 +1,19 @@
+.buttonStyles {
+    border-radius: 15px;
+    width: 150px;
+    height: 75px;
+    font-weight: bold;
+    font-size: 50px;
+    background-color: #61D9FA;
+    border: none;
+}
+
+.buttonStyles:hover {
+    border: 5px solid white;
+}
+
+.buttonStyles:active {
+    background-color: #292C35;
+    color: #61D9FA;
+    border: 5px solid #61D9FA
+}
