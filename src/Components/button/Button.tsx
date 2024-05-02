@@ -7,12 +7,10 @@ type ButtonsPropsType = {
 }
 
 export const Button: FC<ButtonsPropsType> = ({title, onClick}: ButtonsPropsType) => {
-    const onClickHandler = () => {
 
-    }
     return (
         <button className={s.buttonStyles}
-                onClick={onClickHandler}>
+                onClick={onClick}>
             {title}
         </button>
     );

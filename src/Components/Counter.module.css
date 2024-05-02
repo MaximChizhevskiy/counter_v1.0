@@ -9,29 +9,15 @@ body {
     justify-content: space-around;
 }
 
-.setValueBlock {
+.block {
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     width: 600px;
     height: 500px;
     margin-top: 100px;
-    padding-bottom: 0px;
     background-color: #292C35;
     border-radius: 15px;
 }
 
-.counterBlock {
-    box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-    width: 600px;
-    height: 500px;
-    margin-top: 100px;
-    margin-left: 50px;
-    background-color: #292C35;
-    border-radius: 15px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-}
 
 .valuesArea {
     border-radius: 15px;
@@ -55,8 +41,6 @@ body {
     font-weight: bold;
 }
 
-
-
 .buttonsArea {
     border-radius: 15px;
     width: 550px;
@@ -66,7 +50,7 @@ body {
     margin-top: 50px;
     margin-left: 15px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
 }
 
