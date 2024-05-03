@@ -7,4 +7,9 @@
     text-align: center;
     font-weight: bold;
     margin-left: 15px;
+    background-color: white;
+}
+
+.inputError {
+    background-color: red;
 }

@@ -41,6 +41,12 @@ body {
     font-weight: bold;
 }
 
+.currentValue {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+
 .buttonsArea {
     border-radius: 15px;
     width: 550px;
@@ -53,6 +59,11 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
+.errorValue {
+color: red;
+}
+
 
 
 

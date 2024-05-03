@@ -4,23 +4,54 @@ import {Button} from "./button/Button";
 import {Input} from "./input/Input";
 
 export const Counter: FC = () => {
+    const messageForEnterValues:string = 'Enter values and press "set"'
+    const errorMessage:string = "Incorrect value"
 
-    let [currentValue, setCurrentValue] = useState<string | number>("Set your min value")
-    let [minValue, setMinValue] = useState<string>("0")
-    let [maxValue, setMaxValue] = useState<string>("5")
+    const [currentValue, setCurrentValue] = useState<string | number>(messageForEnterValues)
+    const [minValue, setMinValue] = useState<string>("0")
+    const [maxValue, setMaxValue] = useState<string>("5")
+    const [error, setError] = useState<boolean>(false)
+
+    const currentValueStyle: string = `${s.currentValue} ${
+        minValue === '-1' || minValue === maxValue 
+            ? s.errorValue 
+            : ''
+    }`
+
+    const onChangeMinValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget.value === "-1" || e.currentTarget.value === maxValue) {
+            setCurrentValue("Incorrect value")
+        } else {
+            setCurrentValue('Enter values and press "set"')
+        }
+        setMinValue(e.currentTarget.value)
+    }
+
+    const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.currentTarget.value === minValue) {
+            setCurrentValue("Incorrect value")
+        } else {
+            setCurrentValue('Enter values and press "set"')
+        }
+        setMaxValue(e.currentTarget.value)
+    }
 
     const setButtonHandler = () => {
         setCurrentValue(minValue)
     }
 
-    const onChangeMinValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-      setMinValue(e.currentTarget.value)
+    const incButtonHandler = () => {
+        setCurrentValue(+currentValue + 1 )
     }
 
-    const onChangeMaxValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        setMaxValue(e.currentTarget.value)
+    const resetButtonHandler = () => {
+      setCurrentValue(minValue)
     }
 
+
+    const messagesForUser:string = messageForEnterValues || errorMessage
+    const setButtonDisabled:boolean = minValue === "-1"  || minValue === maxValue
+    const counterButtonDisabled = false
 
     return (
         <div className={s.counterStyles}>
@@ -45,21 +76,25 @@ export const Counter: FC = () => {
                 </div>
 
                 <div className={s.buttonsArea}>
-                    <Button title={"set"} onClick={setButtonHandler}/>
+                    <Button title={"set"}
+                            onClick={setButtonHandler}
+                            disabled={setButtonDisabled}/>
                 </div>
             </div>
             {/*Блок счётчика */}
             <div className={s.block}>
                 <div className={s.valuesArea}>
-                    {currentValue}
+                    <span className={currentValueStyle}>{currentValue}</span>
                 </div>
+
                 <div className={s.buttonsArea}>
-                    <Button title={"inc"}/>
-                    <Button title={"reset"}/>
+                    <Button title={"inc"}
+                            onClick={incButtonHandler}/>
+                    <Button title={"reset"}
+                            onClick={resetButtonHandler}
+                            disabled={counterButtonDisabled}/>
                 </div>
-
             </div>
-
         </div>
     );
 };

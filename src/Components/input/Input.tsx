@@ -1,4 +1,4 @@
-import React, {ChangeEvent, FC} from 'react';
+import React, {ChangeEvent, FC, useState} from 'react';
 import s from './Input.module.css'
 
 type InputPropsType = {
@@ -10,9 +10,14 @@ type InputPropsType = {
 }
 
 export const Input: FC<InputPropsType> = ({type, value, onChange, limitMinValue, limitMaxValue}: InputPropsType) => {
+const inputClassName = `${s.inputStyles} ${
+    value === "-1" || value === limitMaxValue || value === limitMinValue
+        ? s.inputError
+        : ''
+}`
 
     return (
-        <input className={s.inputStyles}
+        <input className={inputClassName}
                type={type}
                value={value}
                onChange={onChange}

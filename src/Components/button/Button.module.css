@@ -10,10 +10,18 @@
 
 .buttonStyles:hover {
     border: 5px solid white;
+    cursor: pointer;
 }
 
 .buttonStyles:active {
     background-color: #292C35;
     color: #61D9FA;
     border: 5px solid #61D9FA
+}
+
+.buttonStyles:disabled {
+   background-color: #447683;
+    border: none;
+    color: #345760;
+    cursor: inherit;
 }
