@@ -10,11 +10,11 @@ type InputPropsType = {
 }
 
 export const Input: FC<InputPropsType> = ({type, value, onChange, limitMinValue, limitMaxValue}: InputPropsType) => {
-const inputClassName = `${s.inputStyles} ${
-    value === "-1" || value === limitMaxValue || value === limitMinValue
-        ? s.inputError
-        : ''
-}`
+    const inputClassName = `${s.inputStyles} ${
+        value === "-1" || value === limitMaxValue || value === limitMinValue
+            ? s.inputError
+            : ''
+    }`
 
     return (
         <input className={inputClassName}

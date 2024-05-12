@@ -8,7 +8,7 @@ type ButtonsPropsType = {
 }
 
 export const Button: FC<ButtonsPropsType> = ({title, onClick, disabled}: ButtonsPropsType) => {
-const buttonClassName = `${s.buttonStyles}`
+    const buttonClassName = `${s.buttonStyles}`
 
     return (
         <button className={buttonClassName}

@@ -42,7 +42,7 @@ body {
 }
 
 .currentValue {
-    font-size: 25px;
+    font-size: 35px;
     font-weight: bold;
 }
 
@@ -59,6 +59,8 @@ body {
     justify-content: space-around;
     align-items: center;
 }
+
+
 
 .errorValue {
 color: red;
