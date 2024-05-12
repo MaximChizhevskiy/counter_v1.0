@@ -1,19 +1,29 @@
 import React, {ChangeEvent, FC, useState} from 'react';
 import s from './Counter.module.css'
+import sButton from './button/Button.module.css'
+import sInput from './input/Input.module.css'
+
 import {Button} from "./button/Button";
 import {Input} from "./input/Input";
 
+
 export const Counter: FC = () => {
-    const messageForEnterValues: string = 'Enter values and press "set"'
-    const initialMinValue: string = localStorage.getItem("counterMinValue") || "0"
-    const initialMaxValue: string = localStorage.getItem("counterMaxValue") || "5"
+    let messageForEnterValues = 'Enter values and press "set"'
+    const errorMessage = "Incorrect value"
+
+    const initialMinValue = localStorage.getItem("counterMinValue") || "0"
+    const initialMaxValue = localStorage.getItem("counterMaxValue") || "5"
+
     const initialCurrentValue = (!localStorage.getItem("counterMinValue")) ? messageForEnterValues : initialMinValue
 
-    const errorMessage: string = "Incorrect value"
-
     const [currentValue, setCurrentValue] = useState<string | number>(initialCurrentValue)
-    const [minValue, setMinValue] = useState<string>(initialMinValue)
-    const [maxValue, setMaxValue] = useState<string>(initialMaxValue)
+    const [minValue, setMinValue] = useState(initialMinValue)
+    const [maxValue, setMaxValue] = useState(initialMaxValue)
+
+    messageForEnterValues = minValue !== '-1' || minValue !== maxValue
+        ? 'Enter values and press "set"'
+        : errorMessage
+
 
     const currentValueStyle: string = `${s.currentValue} ${
         minValue === '-1' || minValue === maxValue || currentValue == maxValue
@@ -21,8 +31,15 @@ export const Counter: FC = () => {
             : ''
     }`
 
+    const buttonClassName = `${sButton.buttonStyles}`
+    const inputClassName = `${sInput.inputStyles} ${
+        minValue === "-1" || minValue === maxValue || minValue === maxValue
+            ? sInput.inputError
+            : ''
+    }`
+
     const onChangeMinValueHandler = (e: ChangeEvent<HTMLInputElement>) => {
-        if (e.currentTarget.value === "-1" || e.currentTarget.value === maxValue) {
+        if (e.currentTarget.value === maxValue || e.currentTarget.value == "-1") {
             setCurrentValue(errorMessage)
         } else {
             setCurrentValue(messageForEnterValues)
@@ -54,7 +71,7 @@ export const Counter: FC = () => {
         localStorage.clear()
     }
 
-    const messagesForUser: string = messageForEnterValues || errorMessage
+    const messagesForUser = messageForEnterValues || errorMessage
     //conditions for buttons disable
     const setButtonDisabled: boolean = minValue === "-1" || minValue === maxValue || currentValue !== messagesForUser
     const resetButtonDisabled = typeof currentValue === "string"
@@ -66,22 +83,26 @@ export const Counter: FC = () => {
             <div className={s.block}>
                 <div className={s.valuesArea}>
                     <label> max value:
-                        <Input type={"number"}
+                        <Input className={inputClassName}
+                               type={"number"}
                                value={maxValue}
                                onChange={onChangeMaxValueHandler}
                                limitMinValue={minValue}/>
                     </label>
                     <label> min value:
-                        <Input type={"number"}
-                               value={minValue}
-                               onChange={onChangeMinValueHandler}
-                               limitMinValue={"-1"}
-                               limitMaxValue={maxValue}/>
+                        <Input
+                            className={inputClassName}
+                            type={"number"}
+                            value={minValue}
+                            onChange={onChangeMinValueHandler}
+                            limitMinValue={"-1"}
+                            limitMaxValue={maxValue}/>
                     </label>
                 </div>
 
                 <div className={s.buttonsArea}>
-                    <Button title={"set"}
+                    <Button className={buttonClassName}
+                            title={"set"}
                             onClick={setButtonHandler}
                             disabled={setButtonDisabled}/>
                 </div>
@@ -93,10 +114,12 @@ export const Counter: FC = () => {
                 </div>
 
                 <div className={s.buttonsArea}>
-                    <Button title={"inc"}
+                    <Button className={buttonClassName}
+                            title={"inc"}
                             onClick={incButtonHandler}
                             disabled={incButtonDisabled}/>
-                    <Button title={"reset"}
+                    <Button className={buttonClassName}
+                            title={"reset"}
                             onClick={resetButtonHandler}
                             disabled={resetButtonDisabled}/>
                 </div>

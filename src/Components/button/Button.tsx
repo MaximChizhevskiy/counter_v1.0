@@ -1,17 +1,17 @@
 import React, {FC} from 'react';
-import s from './Button.module.css'
+
 
 type ButtonsPropsType = {
     title: string
     onClick?: () => void
     disabled?: boolean
+    className: string
 }
 
-export const Button: FC<ButtonsPropsType> = ({title, onClick, disabled}: ButtonsPropsType) => {
-    const buttonClassName = `${s.buttonStyles}`
+export const Button: FC<ButtonsPropsType> = ({title, onClick, disabled, className}: ButtonsPropsType) => {
 
     return (
-        <button className={buttonClassName}
+        <button className={className}
                 onClick={onClick}
                 disabled={disabled}>
             {title}

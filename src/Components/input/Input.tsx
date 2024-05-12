@@ -1,5 +1,4 @@
-import React, {ChangeEvent, FC, useState} from 'react';
-import s from './Input.module.css'
+import React, {ChangeEvent, FC} from 'react';
 
 type InputPropsType = {
     type: string
@@ -7,17 +6,13 @@ type InputPropsType = {
     onChange: (e: ChangeEvent<HTMLInputElement>) => void
     limitMinValue: string
     limitMaxValue?: string
+    className: string
 }
 
-export const Input: FC<InputPropsType> = ({type, value, onChange, limitMinValue, limitMaxValue}: InputPropsType) => {
-    const inputClassName = `${s.inputStyles} ${
-        value === "-1" || value === limitMaxValue || value === limitMinValue
-            ? s.inputError
-            : ''
-    }`
+export const Input: FC<InputPropsType> = ({type, value, onChange, limitMinValue, limitMaxValue, className}: InputPropsType) => {
 
     return (
-        <input className={inputClassName}
+        <input className={className}
                type={type}
                value={value}
                onChange={onChange}
